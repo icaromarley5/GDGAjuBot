@@ -27,8 +27,14 @@ def main():
         '-t', '--telegram_token',
         help='Token da API do Telegram')
     parser.add_argument(
-        '-m', '--meetup_key',
-        help='Key da API do Meetup')
+        '-mcid', '--meetup_client_id',
+        help='Client_id da API do Meetup')
+    parser.add_argument(
+        '-mcs', '--meetup_client_secret',
+        help='Client_secret da API do Meetup')
+    parser.add_argument(
+        '-mrt', '--meetup_refresh_token',
+        help='Refresh_token da API do Meetup')
     parser.add_argument(
         '-f', '--facebook_key',
         help='Key da API do Facebook')
@@ -57,7 +63,7 @@ def main():
 
     # Define the events source if needed
     if not _config.events_source:
-        if _config.meetup_key:
+        if _config.meetup_refresh_token:
             _config.events_source = 'meetup'
         elif _config.facebook_key:
             _config.events_source = 'facebook'

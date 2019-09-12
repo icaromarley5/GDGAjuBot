@@ -3,7 +3,9 @@ events_source: meetup
 tokens:
   telegram: "TELEGRAM_TOKEN"
   facebook: "FACEBOOK_API_KEY"
-  meetup: "MEETUP_API_KEY"
+  meetup_client_id: "MEETUP_CLIENT_ID"
+  meetup_client_secret: "MEETUP_CLIENT_SECRET"
+  meetup_refresh_token: "MEETUP_REFRESH_TOKEN"
 links:
   link1: "url_1"
   link2: "url_2"

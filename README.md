@@ -18,6 +18,7 @@ O bot atende aos seguintes comandos:
 - `/about`: Exibe informações sobre o bot.
 - `/events`: listagem dos próximos eventos registrados no meetup.
 - `/book`: livro gratuito do dia da editora [Packt Publishing](https://www.packtpub.com/).
+- `/udemy`: lista de cursos com cupons limitados de 100% de desconto do site [Udemy](https://www.udemy.com/).
 - `/list_users`: (admin) Lista todos os usuários.
 
 As seguintes funções estão disponíveis em `beta`:
@@ -59,16 +60,16 @@ Para isso, é necessário ter o `pipenv` instalado.
 ### Pré-requisitos
 
 Antes de começar, é necessário um token do Telegram [obtido com o @BotFather](https://core.telegram.org/bots#6-botfather),
-que vincula ao seu bot, e uma [chave do Meetup](https://secure.meetup.com/pt-BR/meetup_api/key/),
+que vincula ao seu bot, e o id do cliente, segredo do cliente e refresh token [obtidos ao seguir o passo 1 e 2 descrito em](https://www.meetup.com/pt-BR/meetup_api/auth/#oauth2),
 para ter permissões de acesso à API do Meetup.
 
 ### Iniciar o bot
 
 Para o bot ser iniciado, execute
 
-    $ gdgajubot -t 'TELEGRAM_TOKEN' -m 'MEETUP_KEY' -g 'GROUP_NAME'
+    $ gdgajubot -t 'TELEGRAM_TOKEN' -mcid 'MEETUP_CLIENT_ID' -mcs 'MEETUP_CLIENT_SECRET' -mrt 'MEETUP_REFRESH_TOKEN' -g 'GROUP_NAME'
 
-onde `TELEGRAM_TOKEN` é o token do seu bot, `MEETUP_KEY` a chave do Meetup e `GROUP_NAME` o nome do
+onde `TELEGRAM_TOKEN` é o token do seu bot, `MEETUP_CLIENT_ID` o id do cliente do Meetup, `MEETUP_CLIENT_SECRET` o segredo do cliente do Meetup, `MEETUP_REFRESH_TOKEN` o refresh token do Meetup e `GROUP_NAME` o nome do
 grupo do Meetup onde o bot irá buscar os eventos.
 
 No Windows, use:
@@ -78,7 +79,9 @@ No Windows, use:
 O bot também pode ser executado definindo variáveis de ambiente
 
     $ export TELEGRAM_TOKEN='token do bot'
-    $ export MEETUP_KEY='chave do meetup'
+    $ export MEETUP_CLIENT_ID='id do cliente do meetup'
+    $ export MEETUP_CLIENT_SECRET='segredo do cliente do meetup'
+    $ export MEETUP_REFRESH_TOKEN='refresh token do meetup'
     $ export GROUP_NAME='grupo do meetup'
     $ gdgajubot
 
@@ -94,4 +97,4 @@ Existe um parâmetro opcional que permite encurtar as URLs fornecidas pelo bot: 
 
 O `gdgajubot` é desenvolvido com testes automatizados, porém usando dados estáticos. Para verificar
 se o seu bot está funcionando de verdade, inicie uma conversa com ele com um cliente Telegram.
-Escreva `/events` ou `/book` e veja se ele responde.
+Escreva `/events`,`/book` ou `/udemy` e veja se ele responde.

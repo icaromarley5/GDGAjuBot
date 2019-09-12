@@ -22,7 +22,9 @@ class BotConfig:
     def __init__(
         self,
         telegram_token=None,
-        meetup_key=None,
+        meetup_client_id=None,
+        meetup_client_secret=None,
+        meetup_refresh_token=None,
         facebook_key=None,
         database_url=None,
         group_name=None,
@@ -32,7 +34,9 @@ class BotConfig:
         config_file=None,
     ):
         self.telegram_token = telegram_token
-        self.meetup_key = meetup_key
+        self.meetup_client_id = meetup_client_id
+        self.meetup_client_secret = meetup_client_secret
+        self.meetup_refresh_token = meetup_refresh_token
         self.facebook_key = facebook_key
         self.group_name = group_name.split(',') if group_name else None
         self.url_shortener_key = url_shortener_key
@@ -57,7 +61,9 @@ class BotConfig:
         self.custom_responses = contents.get('custom_responses', None)
         if 'tokens' in contents:
             self.telegram_token = contents['tokens'].get('telegram', None)
-            self.meetup_key = contents['tokens'].get('meetup', None)
+            self.meetup_client_id = contents['tokens'].get('meetup_client_id', None)
+            self.meetup_client_secret = contents['tokens'].get('meetup_client_secret', None)
+            self.meetup_refresh_token = contents['tokens'].get('meetup_refresh_token', None)
             self.facebook_key = contents['tokens'].get('facebook', None)
         if 'database' in contents:
             self.database = contents['database']

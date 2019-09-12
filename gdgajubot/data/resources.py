@@ -59,20 +59,28 @@ class Resources:
 
     def meetup_events(self, n):
         """Obtém eventos do Meetup."""
-        # api v3 base url
+        url = 'https://secure.meetup.com/oauth2/access'
+        data = {
+            'client_id': self.config.meetup_client_id,
+            'client_secret': self.config.meetup_client_secret,
+            'grant_type': 'refresh_token',
+            'refresh_token': self.config.meetup_refresh_token,
+        }
+        token = requests.post(url, data = data).json()['access_token']
+        
         all_events = []
         for group in self.config.group_name:
             url = "https://api.meetup.com/{group}/events".format(
                 group=group
             )
 
-            # response for the events
-            r = requests.get(url, params={
-                'key': self.config.meetup_key,
-                'status': 'upcoming',
-                'only': 'name,time,link',  # filter response to these fields
+            params= {
+                'access_token': token,
+                'has_ended': False,
                 'page': n,                 # limit to n events
-            })
+            }
+            # response for the events
+            r = requests.get(url, params = params)
 
             # API output
             events = r.json()
